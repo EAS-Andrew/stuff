@@ -1,0 +1,57 @@
+
+Design Document: CICD Blocks Release Process
+
+1.  Introduction: The purpose of this document is to outline the release process for the internal framework called CICD Blocks. This process ensures that changes made to the CICD Blocks are thoroughly tested and properly promoted to the appropriate environments. The release process encompasses code changes, automated testing, code review, chart publishing, and promotion of changes to the master branch.
+    
+2.  Process Overview: The release process for CICD Blocks follows the steps below:
+    
+
+Step 1: User Creates Feature Branch
+
+-   Developers create a feature branch in the version control system (e.g., Git) to work on their changes.
+
+Step 2: Making Changes
+
+-   Developers make the necessary changes and improvements to the CICD Blocks framework in their feature branch.
+
+Step 3: Raise Pull Request
+
+-   Once the changes are complete, the developer raises a Pull Request (PR) to merge their feature branch into the main repository.
+
+Step 4: Automated Testing
+
+-   Automated testing tools are triggered to run various tests on the changes introduced in the PR.
+-   The PR can only be merged if all the automated tests pass successfully.
+
+Step 5: Code Review and Approval
+
+-   A code review is required for every PR.
+-   The PR should receive at least one approval from a designated reviewer before it can be merged.
+
+Step 6: Publish Changes to Charts Resource
+
+-   Upon merging the PR, an automated process is triggered to compile the templates into a Helm chart.
+-   The changes made to the CICD Blocks charts resource are published to the dev revision of the zeus/charts repository in the GitHub Enterprise (GHE).
+
+Step 7: ArgoCD Application Sync
+
+-   ArgoCD, a continuous deployment tool, is configured to monitor the zeus/charts repository for changes.
+-   When changes are detected in the charts repository, ArgoCD automatically syncs the state of the defined applications in the OpenShift Container Platform (OCP).
+-   Consequently, changes promoted to the CICD Blocks master branch are also promoted to the zeus/charts dev branch.
+
+Step 8: Testing in Configured Namespace
+
+-   After the synchronization, the changes are available for testing in a specific namespace that is configured to sync with the dev charts revision.
+-   The changes made to CICD Blocks can now be tested thoroughly in this environment.
+
+Step 9: Raise Pull Request from Dev to Master
+
+-   If the testing is successful, a Pull Request is raised on the zeus/charts repository to merge the changes from the dev branch to the master branch.
+-   The PR should receive approval from the designated reviewers.
+
+Step 10: Promote Changes to Projects
+
+-   Once the PR is approved and merged, projects configured to look at the master revision of charts will receive the promoted changes.
+-   The changes made to the CICD Blocks framework will be applied to the appropriate projects.
+
+3.  Conclusion: This document has provided an overview of the release process for CICD Blocks. Following this process ensures that changes made to the CICD Blocks framework go through proper testing and review before being promoted to the master branch and subsequently applied to projects. By adhering to this release process, the stability and reliability of the CICD Blocks framework can be maintained, and any potential issues can be identified and addressed in a controlled manner.
