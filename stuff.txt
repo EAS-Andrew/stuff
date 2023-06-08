@@ -1,57 +1,15 @@
+Diagram 1: Teams provide an MPW glassbreak account during onboarding that will be used for approving deployments.
 
-Design Document: CICD Blocks Release Process
+During the onboarding process, teams are required to provide an MPW (Multi-Person Workflow) glassbreak account. This account serves as a crucial component for the approval process of deployments. By utilizing this account, teams can ensure that only authorized individuals can review and approve changes before they are deployed.
 
-1.  Introduction: The purpose of this document is to outline the release process for the internal framework called CICD Blocks. This process ensures that changes made to the CICD Blocks are thoroughly tested and properly promoted to the appropriate environments. The release process encompasses code changes, automated testing, code review, chart publishing, and promotion of changes to the master branch.
-    
-2.  Process Overview: The release process for CICD Blocks follows the steps below:
-    
+The MPW glassbreak account acts as a centralized platform where teams can collaborate and coordinate their efforts to assess the readiness of deployments. It serves as a secure channel through which teams can request and obtain the necessary approvals from relevant stakeholders. By utilizing this dedicated account, teams can streamline the deployment approval process and ensure that all necessary checks and balances are in place before moving forward.
 
-Step 1: User Creates Feature Branch
+Diagram 2: When a developer is ready to promote a change to an environment - They raise a pull request against the target environment branch. Branch protection rules specified in the repository for any environment branches enforce 2 required approvals for pull requests, one of which needs to be by the approvers group. This enforces both a four-eyes check and the necessary actor with a valid ServiceNOW change record must approve the deployment.
 
--   Developers create a feature branch in the version control system (e.g., Git) to work on their changes.
+When a developer is prepared to promote a change to a specific environment, they initiate the process by raising a pull request against the corresponding target environment branch. To ensure a robust and controlled deployment workflow, the repository is configured with branch protection rules that dictate the required steps for pull request approvals.
 
-Step 2: Making Changes
+According to these rules, any pull request targeting environment branches must have at least two approvals. This requirement serves two essential purposes. First, it enforces a "four-eyes check," meaning that multiple individuals must review the proposed changes to minimize the likelihood of errors or oversights. By involving more than one set of eyes, the chances of detecting potential issues are significantly improved.
 
--   Developers make the necessary changes and improvements to the CICD Blocks framework in their feature branch.
+Additionally, one of the required approvals needs to come from the designated approvers group. This group consists of individuals with the authority and expertise to evaluate the changes based on specific criteria and guidelines. Their approval ensures that the deployment aligns with established standards and best practices.
 
-Step 3: Raise Pull Request
-
--   Once the changes are complete, the developer raises a Pull Request (PR) to merge their feature branch into the main repository.
-
-Step 4: Automated Testing
-
--   Automated testing tools are triggered to run various tests on the changes introduced in the PR.
--   The PR can only be merged if all the automated tests pass successfully.
-
-Step 5: Code Review and Approval
-
--   A code review is required for every PR.
--   The PR should receive at least one approval from a designated reviewer before it can be merged.
-
-Step 6: Publish Changes to Charts Resource
-
--   Upon merging the PR, an automated process is triggered to compile the templates into a Helm chart.
--   The changes made to the CICD Blocks charts resource are published to the dev revision of the zeus/charts repository in the GitHub Enterprise (GHE).
-
-Step 7: ArgoCD Application Sync
-
--   ArgoCD, a continuous deployment tool, is configured to monitor the zeus/charts repository for changes.
--   When changes are detected in the charts repository, ArgoCD automatically syncs the state of the defined applications in the OpenShift Container Platform (OCP).
--   Consequently, changes promoted to the CICD Blocks master branch are also promoted to the zeus/charts dev branch.
-
-Step 8: Testing in Configured Namespace
-
--   After the synchronization, the changes are available for testing in a specific namespace that is configured to sync with the dev charts revision.
--   The changes made to CICD Blocks can now be tested thoroughly in this environment.
-
-Step 9: Raise Pull Request from Dev to Master
-
--   If the testing is successful, a Pull Request is raised on the zeus/charts repository to merge the changes from the dev branch to the master branch.
--   The PR should receive approval from the designated reviewers.
-
-Step 10: Promote Changes to Projects
-
--   Once the PR is approved and merged, projects configured to look at the master revision of charts will receive the promoted changes.
--   The changes made to the CICD Blocks framework will be applied to the appropriate projects.
-
-3.  Conclusion: This document has provided an overview of the release process for CICD Blocks. Following this process ensures that changes made to the CICD Blocks framework go through proper testing and review before being promoted to the master branch and subsequently applied to projects. By adhering to this release process, the stability and reliability of the CICD Blocks framework can be maintained, and any potential issues can be identified and addressed in a controlled manner.
+Furthermore, the branch protection rules also specify that the necessary actor with a valid ServiceNOW change record must approve the deployment. This requirement ensures that only authorized individuals, who have followed the proper change management process within the ServiceNOW system, can grant approval for the deployment. By incorporating this additional layer of validation, organizations can maintain a high level of control and accountability over the deployment process, mitigating potential risks and ensuring compliance with established protocols.
