@@ -35,3 +35,8 @@ Inadequate documentation and audit trails: Without a formal process for deployme
 Limited visibility and accountability: The absence of a deployment approval workflow makes it difficult to track, monitor, and report on the status and progress of changes. This lack of visibility compromises accountability and makes it challenging to identify bottlenecks, address issues promptly, and ensure compliance with organizational policies and standards.
 
 Addressing these challenges by implementing a structured deployment approval workflow is essential to mitigate risks, ensure efficient change management, and maintain a stable and secure production environment. By establishing clear approval processes, organizations can improve control, reduce operational risks, enhance collaboration, and enable effective documentation and auditing of changes.
+
+
+
+
+In the pre-deployment pipeline, a Change Record ID obtained from the Pull Request raised against an environment branch of the deployment repository is utilized. This pipeline plays a crucial role in validating the record's authenticity and relevance. By cross-referencing the Change Record ID, the pipeline ensures that the proposed changes align with the documented requirements and intended scope of the deployment. Subsequently, the pipeline provides a status check update to the Pull Request, either allowing or denying the request based on the outcome of the validation process. This status update enables the development team to proceed with confidence, knowing that the necessary checks and balances have been completed before proceeding with the deployment.
