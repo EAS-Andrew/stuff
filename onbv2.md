@@ -28,7 +28,7 @@ Use Kubernetes Operators combined with CRDs to manage and maintain the configura
 
 ### **3.1 Process Flow**
 
-![](attachments/11862017/11894789.png)
+![](pfd.png)
 
 * * *
 
