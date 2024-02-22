@@ -50,3 +50,16 @@ tickets:
     description: "AS A developer, I WANT to perform integration testing on the converted application, SO THAT I can ensure all functionalities work together as expected."
     acceptance_criteria: 
       - "GIVEN the converted application, WHEN it is run against a set of test configurations, THEN all configurations should be applied idempotently and correctly."
+
+  - name: "Convert v1 Blocks to v2 with New Binary Integration"
+    description: "AS A developer, I WANT to convert existing v1 blocks into v2 blocks that incorporate the new binary, SO THAT the blocks can utilize enhanced functionality and improved performance."
+    acceptance_criteria:
+      - "GIVEN existing v1 blocks, WHEN converted to v2, THEN they should integrate the new binary and be fully compatible with the v2 blocks framework."
+      - "GIVEN the need for backward compatibility, WHEN v1 blocks are converted, THEN they should maintain functionality with existing patterns where applicable."
+
+  - name: "Develop v2 Pattern for Git Operations Integration"
+    description: "AS A developer, I WANT to create a v2 pattern that integrates the enhanced v2 blocks with standard git pull and push blocks, SO THAT we can streamline CI/CD workflows with the latest blocks framework capabilities."
+    acceptance_criteria:
+      - "GIVEN the new v2 blocks, WHEN a v2 pattern is developed, THEN it should seamlessly integrate git pull and push operations with the converted v2 blocks."
+      - "GIVEN the requirement for efficiency, WHEN the v2 pattern is executed, THEN it should optimize the workflow by leveraging the improvements in the v2 blocks."
+
