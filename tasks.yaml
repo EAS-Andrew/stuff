@@ -1,83 +1,52 @@
 epic:
-  name: API Conversion and Configuration Overhaul for Golang Binary
-  description: |
-    This epic encompasses the transformation of a Golang binary, currently structured as a multiple entrypoint CLI application built with Cobra, into a versatile API service. The reimagined service will expose the existing functionality through well-defined API endpoints, facilitating more dynamic interaction patterns and improved scalability. A significant aspect of this transition involves reconfiguring the application to process a directory of configuration files, moving away from the limitation of a single config file setup. This change aims to enhance modularity, ease of management, and flexibility in handling diverse operational contexts across various functional resources such as deploy-repo, Nexusrm, Vault, GitHub teams, Argo AoA repo, pipeline config repos, and src code webhook registration. The epic is structured to ensure a thorough design phase, followed by systematic implementation phases for each functional resource, culminating in robust error handling, logging, and comprehensive documentation to support future development and usage.
-
+  description: Transform the Golang application to use a directory of configuration files instead of a single file, enabling idempotent operations and improved scalability across multiple functional resources. This shift aims to streamline updates, enhance maintainability, and ensure consistent application behavior.
 tickets:
-  - name: Architectural Design for Golang Binary API Conversion
-    description: AS A developer, I WANT to design the architecture for converting the Golang binary from a CLI to an API service, SO THAT it can expose its functionality through an API and handle multiple configurations efficiently.
-    acceptance_criteria: Given the current Golang binary, when the architectural design is reviewed, then it should detail the API endpoints, request/response formats, and how the binary will process multiple configurations.
+  - name: "Design the Conversion Approach"
+    description: "AS A developer, I WANT to design a conversion approach for the Golang binary, SO THAT it can operate idempotently on a directory of configurations."
+    acceptance_criteria: 
+      - "GIVEN the current Golang binary, WHEN the design is reviewed, THEN it should cover all functional resources and the new configuration handling."
 
-  - name: Design Directory Structure for Multiple Configurations
-    description: AS A developer, I WANT to design a directory structure for storing multiple configuration files, SO THAT the new API service can easily access and process each configuration.
-    acceptance_criteria: Given the requirement for handling multiple configurations, when the directory structure design is reviewed, then it should clearly organize configuration files for easy access by the API service.
+  - name: "Implement Golang Structs for Configurations"
+    description: "AS A developer, I WANT to implement Golang structs for the new configuration files, SO THAT the application can parse and use them efficiently."
+    acceptance_criteria: 
+      - "GIVEN new configuration definitions, WHEN the application loads configurations, THEN each configuration should be correctly parsed into its respective struct."
 
-  - name: Implement Golang Structs for Deploy-Repo Configuration
-    description: AS A developer, I WANT to implement Golang structs for the deploy-repo configuration, SO THAT the new configuration format can be easily processed.
-    acceptance_criteria: Given the new deploy-repo configuration format, when the Golang structs are implemented, then they should accurately map to the relevant inputs for deploy-repo configuration.
+  - name: "Convert Deploy-Repo Configuration"
+    description: "AS A developer, I WANT to convert the deploy-repo configuration, SO THAT it can be processed from a separate file in an idempotent manner."
+    acceptance_criteria: 
+      - "GIVEN a directory of deploy-repo configurations, WHEN the application runs, THEN each configuration should be applied idempotently."
 
-  - name: Integrate Deploy-Repo Config with API Service
-    description: AS A developer, I WANT to integrate deploy-repo configuration processing with the API service, SO THAT deploy-repo configurations can be managed via API calls.
-    acceptance_criteria: Given the deploy-repo Golang structs, when an API call is made for deploy-repo configuration, then the API service should process the configuration and perform the necessary actions.
+  - name: "Convert Nexusrm Configuration"
+    description: "AS A developer, I WANT to convert the Nexusrm configuration, SO THAT it operates on a directory of configurations idempotently."
+    acceptance_criteria: 
+      - "GIVEN a directory of Nexusrm configurations, WHEN the application runs, THEN each configuration should be applied idempotently."
 
-  - name: Implement Golang Structs for Nexusrm Configuration
-    description: AS A developer, I WANT to implement Golang structs for the Nexusrm configuration, SO THAT the new configuration format can be easily processed.
-    acceptance_criteria: Given the new Nexusrm configuration format, when the Golang structs are implemented, then they should accurately map to the relevant inputs for Nexusrm configuration.
+  - name: "Convert Vault Configuration"
+    description: "AS A developer, I WANT to convert the Vault configuration, SO THAT it can be handled from separate files in an idempotent manner."
+    acceptance_criteria: 
+      - "GIVEN a directory of Vault configurations, WHEN the application runs, THEN each configuration should be applied idempotently."
 
-  - name: Integrate Nexusrm Config with API Service
-    description: AS A developer, I WANT to integrate Nexusrm configuration processing with the API service, SO THAT Nexusrm configurations can be managed via API calls.
-    acceptance_criteria: Given the Nexusrm Golang structs, when an API call is made for Nexusrm configuration, then the API service should process the configuration and perform the necessary actions.
+  - name: "Convert GitHub Team Configuration"
+    description: "AS A developer, I WANT to convert the GitHub team configuration, SO THAT it can be processed from separate files idempotently."
+    acceptance_criteria: 
+      - "GIVEN a directory of GitHub team configurations, WHEN the application runs, THEN each configuration should be applied idempotently."
 
-  # Vault Configuration
-  - name: Implement Golang Structs for Vault Configuration
-    description: AS A developer, I WANT to implement Golang structs for the Vault configuration, SO THAT the new configuration format can be easily processed.
-    acceptance_criteria: Given the new Vault configuration format, when the Golang structs are implemented, then they should accurately map to the relevant inputs for Vault configuration.
+  - name: "Convert Argo AoA Repo Configuration"
+    description: "AS A developer, I WANT to convert the Argo AoA repo configuration, SO THAT it operates on a directory of configurations idempotently."
+    acceptance_criteria: 
+      - "GIVEN a directory of Argo AoA repo configurations, WHEN the application runs, THEN each configuration should be applied idempotently."
 
-  - name: Integrate Vault Config with API Service
-    description: AS A developer, I WANT to integrate Vault configuration processing with the API service, SO THAT Vault configurations can be managed via API calls.
-    acceptance_criteria: Given the Vault Golang structs, when an API call is made for Vault configuration, then the API service should process the configuration and perform the necessary actions.
+  - name: "Convert Pipeline Config Repo Configuration"
+    description: "AS A developer, I WANT to convert the pipeline config repo configuration, SO THAT it can be processed from separate files in an idempotent manner."
+    acceptance_criteria: 
+      - "GIVEN a directory of pipeline config repo configurations, WHEN the application runs, THEN each configuration should be applied idempotently."
 
-  # GitHub Team Configuration
-  - name: Implement Golang Structs for GitHub Team Configuration
-    description: AS A developer, I WANT to implement Golang structs for the GitHub Team configuration, SO THAT the new configuration format can be easily processed.
-    acceptance_criteria: Given the new GitHub Team configuration format, when the Golang structs are implemented, then they should accurately map to the relevant inputs for GitHub Team configuration.
+  - name: "Convert Src Code Webhook Registration"
+    description: "AS A developer, I WANT to convert the src code webhook registration, SO THAT it operates on a directory of configurations idempotently."
+    acceptance_criteria: 
+      - "GIVEN a directory of src code webhook registrations, WHEN the application runs, THEN each registration should be applied idempotently."
 
-  - name: Integrate GitHub Team Config with API Service
-    description: AS A developer, I WANT to integrate GitHub Team configuration processing with the API service, SO THAT GitHub Team configurations can be managed via API calls.
-    acceptance_criteria: Given the GitHub Team Golang structs, when an API call is made for GitHub Team configuration, then the API service should process the configuration and perform the necessary actions.
-
-  # Argo AoA Repo Configuration
-  - name: Implement Golang Structs for Argo AoA Repo Configuration
-    description: AS A developer, I WANT to implement Golang structs for the Argo AoA Repo configuration, SO THAT the new configuration format can be easily processed.
-    acceptance_criteria: Given the new Argo AoA Repo configuration format, when the Golang structs are implemented, then they should accurately map to the relevant inputs for Argo AoA Repo configuration.
-
-  - name: Integrate Argo AoA Repo Config with API Service
-    description: AS A developer, I WANT to integrate Argo AoA Repo configuration processing with the API service, SO THAT Argo AoA Repo configurations can be managed via API calls.
-    acceptance_criteria: Given the Argo AoA Repo Golang structs, when an API call is made for Argo AoA Repo configuration, then the API service should process the configuration and perform the necessary actions.
-
-  # Pipeline Config Repo Configuration
-  - name: Implement Golang Structs for Pipeline Config Repo Configuration
-    description: AS A developer, I WANT to implement Golang structs for the Pipeline Config Repo configuration, SO THAT the new configuration format can be easily processed.
-    acceptance_criteria: Given the new Pipeline Config Repo configuration format, when the Golang structs are implemented, then they should accurately map to the relevant inputs for Pipeline Config Repo configuration.
-
-  - name: Integrate Pipeline Config Repo Config with API Service
-    description: AS A developer, I WANT to integrate Pipeline Config Repo configuration processing with the API service, SO THAT Pipeline Config Repo configurations can be managed via API calls.
-    acceptance_criteria: Given the Pipeline Config Repo Golang structs, when an API call is made for Pipeline Config Repo configuration, then the API service should process the configuration and perform the necessary actions.
-
-  # Src Code Webhook Registration
-  - name: Implement Golang Structs for Src Code Webhook Registration
-    description: AS A developer, I WANT to implement Golang structs for the Src Code Webhook Registration, SO THAT the new configuration format can be easily processed.
-    acceptance_criteria: Given the new Src Code Webhook Registration format, when the Golang structs are implemented, then they should accurately map to the relevant inputs for Src Code Webhook Registration.
-
-  - name: Integrate Src Code Webhook Registration with API Service
-    description: AS A developer, I WANT to integrate Src Code Webhook Registration processing with the API service, SO THAT Src Code Webhook Registrations can be managed via API calls.
-    acceptance_criteria: Given the Src Code Webhook Registration Golang structs, when an API call is made for Src Code Webhook Registration, then the API service should process the registration and perform the necessary actions.
-
-  # Global Tickets
-  - name: Implement Error Handling and Logging for API Service
-    description: AS A developer, I WANT to implement comprehensive error handling and logging for the API service, SO THAT issues can be quickly identified and resolved.
-    acceptance_criteria: Given any operation performed by the API service, when an error occurs or an operation is performed, then it should be logged with sufficient detail, and appropriate error responses should be returned.
-
-  - name: Create API Documentation and Client Library
-    description: AS A developer, I WANT to create detailed API documentation and a client library, SO THAT consumers can easily understand how to interact with the API service.
-    acceptance_criteria: Given the completed API service, when the documentation and client library are reviewed, then they should provide clear instructions on how to use the API and interact with each functional resource.
+  - name: "Integration Testing"
+    description: "AS A developer, I WANT to perform integration testing on the converted application, SO THAT I can ensure all functionalities work together as expected."
+    acceptance_criteria: 
+      - "GIVEN the converted application, WHEN it is run against a set of test configurations, THEN all configurations should be applied idempotently and correctly."
